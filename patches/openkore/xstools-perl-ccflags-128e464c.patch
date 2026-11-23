@@ -1,0 +1,21 @@
+diff --git a/SConstruct b/SConstruct
+index c168a9a0a..2438d1647 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -86,6 +86,7 @@ def CheckPerl(context):
+ 
+ 	open(F, ">", ".perlconfig.txt");
+ 	print F "perl=$Config{perlpath}\\n";
++	print F "ccflags=$Config{ccflags}\\n";
+ 	print F "typemap=" . search(\\@INC, "ExtUtils/typemap") . "\\n";
+ 	print F "xsubpp=" . search(\\@INC, "ExtUtils/xsubpp" || search([File::Spec->path()], "xsubpp")) . "\\n";
+ 	print F "coredir=$coredir\\n";
+@@ -337,7 +338,7 @@ elif not darwin:
+ 		' -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64')
+ else:
+ 	# MacOS X
+-	perlenv['CCFLAGS'] += ['-no-cpp-precomp', '-DPERL_DARWIN',
++	perlenv['CCFLAGS'] += Split(perlconfig['ccflags']) + ['-no-cpp-precomp', '-DPERL_DARWIN',
+ 			      '-fno-strict-aliasing']
+ 	perlenv['LIBS'] += ['perl']
+ 	perlenv['LIBPATH'] += [perlconfig['coredir']]

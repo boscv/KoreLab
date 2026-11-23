@@ -1,0 +1,28 @@
+diff --git a/plugins/macro/Macro/Utilities.pm b/plugins/macro/Macro/Utilities.pm
+index 09ceb4710..1b8452f6a 100644
+--- a/plugins/macro/Macro/Utilities.pm
++++ b/plugins/macro/Macro/Utilities.pm
+@@ -418,18 +418,17 @@ sub getRandom {
+ # returns given argument from a comma separated list
+ # returns -1 if no such listID exists or when the list is empty or wrong
+ sub getArgFromList {
+-	my ($listID, $list) = split(/, \s*/, $_[0]);
++	my ($listID, $list) = split(/,\s*/, $_[0], 2);
+ 	my @items = split(/,\s*/, $list);
+ 	unless (@items) {
+ 		warning "[macro] wrong syntax in \@listItem\n", "macro";
+ 		return -1
+ 	}
+-	if ($items[$listID]) {
+ 	return $items[$listID]
+-		} else {
+-		warning "[macro] the $listID number item does not exist in the list\n", "macro";
+-		return -1
+-	}
++		if defined $listID && $listID =~ /^\d+$/ && $listID < @items && defined $items[$listID];
++
++	warning "[macro] the $listID number item does not exist in the list\n", "macro";
++	return -1
+ }
+ 
+ # returns the lenght of a comma separated list

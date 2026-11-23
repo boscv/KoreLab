@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "korelab"
+version = "0.1.0"
+description = "A local OpenKore and rAthena test laboratory"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = []
+
+[project.optional-dependencies]
+mysql = ["PyMySQL>=1.1"]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+korelab = "korelab.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["korelab*"]

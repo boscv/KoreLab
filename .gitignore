@@ -1,0 +1,21 @@
+runs/
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.env.*
+korelab.local.json
+*.local.json
+*.db
+*.sqlite
+*.sqlite3
+
+# Local Python development and test artifacts
+.venv/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
